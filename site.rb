@@ -8,7 +8,7 @@ configure do
 end
 
 get '/' do
-  erb :index, :locals => {}
+  erb :index, :locals => { :entries => Entry.all }
 end
 
 get '/css/style.css' do
@@ -21,6 +21,13 @@ get '/id/:id' do
 end
 
 post '/' do
+  e = Entry.new
+  e.text = params[:text]
+  e.email = params[:email]
+  e.create_date = Time.now
+  e.modify_date = Time.now
+  e.save
+
   redirect '/'
 end
 
