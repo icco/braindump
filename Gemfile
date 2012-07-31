@@ -8,7 +8,6 @@ gem 'less'
 gem 'activerecord', :require => 'active_record'
 
 # Database
-gem 'sqlite3'
 group :production do
   gem 'pg'
 end
@@ -31,7 +30,7 @@ gem 'padrino', '0.10.7'
 
 # For dev.
 group :development, :test do
-  gem "heroku"
-  gem "shotgun"
-  gem "sqlite3"
+  gem 'heroku'
+  gem 'shotgun'
+  gem 'sqlite3'
 end
