@@ -6,7 +6,7 @@
 
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link href="/css/style.css" type="text/css" rel="stylesheet" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -19,6 +19,12 @@
       <div class="page-header">
         <h1>BrainDump.io</h1>
       </div>
+
+      <% entries.each do |entry| %>
+        <div>
+          <a href="/id/<%= entry.uuid %>"><%= entry.email %> writes</a>: <%= entry.text %>
+        </div>
+      <% end %>
 
       <div>
         <form method="post" class="form-horizontal">

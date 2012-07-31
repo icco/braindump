@@ -15,8 +15,8 @@ get '/css/style.css' do
   less :style
 end
 
-get '/id/:id' do
-  Entry.filter(:id => params[:id]).first.to_s
+get '/id/:uuid' do
+  Entry.filter(:uuid => params[:uuid]).first.to_json
 end
 
 post '/' do
