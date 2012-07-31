@@ -39,13 +39,13 @@ class Braindump < Padrino::Application
   #
 
   ##
-  # You can configure for a specified environment like:
+  # Environment
   #
-  #   configure :development do
-  #     set :foo, :bar
-  #     disable :asset_stamp # no asset timestamping for dev
-  #   end
-  #
+  configure do
+    set :sessions, true
+    DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/data.db')
+  end
+
 
   ##
   # You can manage errors like:
