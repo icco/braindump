@@ -20,7 +20,7 @@ Braindump.controllers  do
 
   get :index do
     if session[:email]
-      @entries = Entry.where(:email => session[:email]).order("updated_at DESC")
+      @entries = Entry.where(:email => session[:email]).order("updated_at DESC").group(:uuid)
       erb :index
     else
       erb :login
@@ -45,7 +45,26 @@ Braindump.controllers  do
   end
 
   get :id, :with => :uuid do
-    Entry.where(:uuid => params[:uuid]).to_json
+    @entries = Entry.where(:uuid => params[:uuid]).order("updated_at DESC")
+    render :edit
+  end
+
+  post :edit, :with => :uuid do
+    previous = Entry.where(:uuid => params[:uuid]).order("updated_at DESC").first
+
+    if session[:email].nil?
+      error 403
+    elsif previous.email != session[:email]
+      error 403
+    end
+
+    e = Entry.new
+    e.uuid = params[:uuid] # Need to add some security here.
+    e.text = params[:text]
+    e.email = previous.email
+    e.save
+
+    redirect url(:id, params[:uuid])
   end
 
   post :index do
