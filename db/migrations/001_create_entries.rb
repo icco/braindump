@@ -4,8 +4,8 @@ Sequel.migration do
       primary_key :id
       String :text
       String :email
+      String :uuid
       DateTime :create_date
-      DateTime :modify_date
     end
   end
 end
