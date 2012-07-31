@@ -5,18 +5,19 @@ A site for writing.
 ## MVP
 
  * One box for writing text
- * Save to git repo per user
+ * Ability to export all data in a reasonable format
  * a Stream
+ * revision history
+ * Mobile apps
 
 ## Database Stuff
 
-Add migrations by adding files to `db/migrations/` and then run `rake db` to migrate the db.
+ * `rake ar:migrate:new`
+ * edit file
+ * `rake ar:migrate`
 
 ## Resources
 
-To run your site locally, run `rackup`.
+To run your site locally, run `rake local`.
 
- * [Sinatra Documentation](http://www.sinatrarb.com/intro)
- * [Sequel Cheatsheet](http://cheat.errtheblog.com/s/sequel/)
- * [Sequel Model HowTo](http://sequel.rubyforge.org/rdoc/files/doc/association_basics_rdoc.html)
 
