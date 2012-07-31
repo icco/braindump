@@ -19,7 +19,24 @@ Braindump.controllers  do
   # end
 
   get :index do
-    erb :index, :locals => { :entries => Entry.all }
+    if session[:email]
+      @entries = Entry.where(:email => session[:email]).order("updated_at DESC")
+      erb :index
+    else
+      erb :login
+    end
+  end
+
+  post :login do
+    session[:email] = params[:email]
+
+    redirect '/'
+  end
+
+  get :logout do
+    session[:email] = nil
+
+    redirect '/'
   end
 
   get '/css/style.css' do
@@ -28,10 +45,15 @@ Braindump.controllers  do
   end
 
   get :id, :with => :uuid do
-    Entry.filter(:uuid => params[:uuid]).first.to_json
+    Entry.where(:uuid => params[:uuid]).to_json
   end
 
   post :index do
+
+    if session[:email].nil?
+      error 403
+    end
+
     e = Entry.new
 
     if params[:uuid]
@@ -39,8 +61,7 @@ Braindump.controllers  do
     end
 
     e.text = params[:text]
-    e.email = params[:email]
-    e.create_date = Time.now
+    e.email = session[:email]
     e.save
 
     redirect '/'

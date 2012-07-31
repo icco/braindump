@@ -17,23 +17,22 @@
   <body>
     <div class="container">
       <div class="page-header">
-        <h1>BrainDump.io <small><%= session[:email] %></small></h1>
+        <h1>BrainDump.io</h1>
       </div>
 
       <div>
-        <form method="post" class="form-vertical">
-          <textarea name="text" class="input-xlarge span12" style="height: 250px;"></textarea>
-          <button type="submit" class="btn btn-primary">Post</button>
+        <form method="post" class="form-horizontal" action="/login">
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="input01">email</label>
+              <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" name="email">
+              </div>
+            </div>
+
+          <button type="submit" class="btn btn-primary">login</button>
         </form>
       </div>
-
-      <% @entries.each do |entry| %>
-        <div class="well">
-          <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
-          <a href="/id/<%= entry.uuid %>"><%= fmt_date entry.updated_at %></a>: <%= entry.text %>
-        </div>
-      <% end %>
-
     </div> <!-- /container -->
 
     <!-- JS. Placed at the end of the document so the pages load faster -->
