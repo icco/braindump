@@ -1,4 +1,4 @@
-class Entry < Sequel::Model(:entries)
+class Entry < ActiveRecord::Base
   def before_create
     if self.uuid.nil?
       self.uuid = Entry.new_uuid

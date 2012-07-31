@@ -1,44 +1,29 @@
-# Import in official clean and clobber tasks
-require 'rake/clean'
-CLEAN.include("db/data.db")
+require File.expand_path('../config/boot.rb', __FILE__)
+require 'padrino-core/cli/rake'
 
-namespace :db do
-  require "sequel"
+PadrinoTasks.init
 
-  desc "Bring database schema up to par."
-  task :migrate do
-    db_url = ENV['DATABASE_URL'] || "sqlite://db/data.db"
-    migrations_dir = "./db/migrations/"
+desc "Run a local server."
+task :local do
+  #Kernel.exec("redis-server /usr/local/etc/redis.conf &")
+  Kernel.exec("shotgun -p 4567 -s thin")
+end
 
-    puts "Migrating from '#{migrations_dir}' into '#{db_url}'."
+task :default do
+  puts "THERE IS NO DEFAULT!"
+end
 
-    ret = Kernel.system("sequel -m #{migrations_dir} #{db_url}");
+namespace :ar do
+  namespace :migrate do
+    desc "Create a new db migration."
+    task :new do
+      # YYYYMMDDHHMMSS_create_products.rb
+      date = Time.now.strftime("%Y%m%d%H%M%S")
+      filename = "db/migrate/#{date}_new_migration.rb"
+      f = File.new(filename, File::CREAT|File::TRUNC|File::RDWR, 0644)
+      f.close
 
-    if ret
-      puts "Database migrated."
-    else
-      puts "Database migration failed."
+      puts filename
     end
-
-    puts "Database built."
-  end
-
-  desc "Delete the database"
-  task :erase do
-    DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/data.db')
-    DB.drop_table(:sites)
-    DB.drop_table(:commits)
-    DB.drop_table(:schema_info)
-  end
-
-  desc "Dumps the database"
-  task :dump do
-    DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/data.db')
-
-    puts "Sites Schema"
-    p DB.schema :sites
-
-    puts "Commits Schema"
-    p DB.schema :commits
   end
 end
