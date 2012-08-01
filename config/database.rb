@@ -3,8 +3,8 @@
 prefix = "braindump"
 
 connections = {
-  :development => "sqlite://db/#{prefix}_development.db",
-  :test => "sqlite://db/#{prefix}_test.db",
+  :development => "postgres://localhost/braindump",
+  :test => "postgres://localhost/braindump_test",
   :production => ENV['DATABASE_URL']
 }
 
