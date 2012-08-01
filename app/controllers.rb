@@ -55,6 +55,10 @@ Braindump.controllers  do
     render :edit
   end
 
+  get :hash, :with => :hashtag do
+    params[:hashtag].inspect
+  end
+
   post :edit, :with => :uuid do
     previous = Entry.where(:uuid => params[:uuid]).order("updated_at DESC").first
 
