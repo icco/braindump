@@ -20,8 +20,16 @@ Braindump.controllers  do
 
   get :index do
     if session[:email]
-      # this group by doesn't work in psql. Maybe use a delete_if?
-      @entries = Entry.where(:email => session[:email]).order("updated_at DESC").group(:uuid)
+      # Can't use a group due to psql, and updated_at is wrong....
+      @entries = Entry.where(:email => session[:email]).order("updated_at DESC")
+
+      # This doesn't work either!
+      @uuids = {}
+      @entries.each do |entry|
+        @uuids[entry.uuid] ||= []
+        @uuids[entry.uuid].push entry
+      end
+
       erb :index
     else
       erb :login
