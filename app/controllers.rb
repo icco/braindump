@@ -20,14 +20,11 @@ Braindump.controllers  do
 
   get :index do
     if session[:email]
-      # Can't use a group due to psql, and updated_at is wrong....
-      @entries = Entry.where(:email => session[:email]).order("updated_at DESC")
+      @uuids = Entry.select(:uuid).uniq.where(:email => session[:email])
 
-      # This doesn't work either!
-      @uuids = {}
-      @entries.each do |entry|
-        @uuids[entry.uuid] ||= []
-        @uuids[entry.uuid].push entry
+      @entries = []
+      @uuids.each do |uuid|
+        @entries.push Entry.where(:uuid => uuid.uuid).order("updated_at DESC").first
       end
 
       erb :index
