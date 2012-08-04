@@ -27,6 +27,8 @@ Braindump.controllers  do
         @entries.push Entry.where(:uuid => uuid.uuid).order("updated_at DESC").first
       end
 
+      @entries.sort! {|a,b|  b.created_at <=> a.created_at }
+
       erb :index
     else
       erb :login
@@ -72,6 +74,7 @@ Braindump.controllers  do
     e.uuid = params[:uuid] # Need to add some security here.
     e.text = params[:text]
     e.email = previous.email
+    e.created_at = previous.created_at
     e.save
 
     redirect url(:id, params[:uuid])
