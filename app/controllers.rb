@@ -51,7 +51,9 @@ Braindump.controllers  do
   end
 
   get :hash, :with => :hashtag do
-    params[:hashtag].inspect
+    @entries = Entry.get_unique session[:email], params[:hashtag]
+
+    render :hash
   end
 
   post :edit, :with => :uuid do
