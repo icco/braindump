@@ -6,7 +6,7 @@ class Entry < ActiveRecord::Base
 
   def self.new_uuid
     # Only works in Ruby > 1.9.2
-    # Returns 24 hex chars
-    return SecureRandom.hex(24).to_s
+    # Returns 10 hex chars
+    return SecureRandom.hex(10).to_s
   end
 end
