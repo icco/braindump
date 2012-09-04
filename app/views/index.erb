@@ -31,7 +31,7 @@
       <% @entries.each do |entry| %>
         <div class="well">
           <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
-          <a href="/id/<%= entry.uuid %>"><%= fmt_date entry.updated_at %></a>: <%= h entry.text %>
+          <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>: <%= h entry.text %>
         </div>
       <% end %>
 
