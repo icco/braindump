@@ -9,4 +9,21 @@ class Entry < ActiveRecord::Base
     # Returns 10 hex chars
     return SecureRandom.hex(10).to_s
   end
+
+  def self.get_unique(email, with_string = "")
+    if with_string.empty?
+      uuids = Entry.select(:uuid).uniq.where(:email => email)
+    else
+      uuids = Entry.select(:uuid).uniq.where(:email => email).where("text LIKE ?", "%##{with_string}%")
+    end
+
+    entries = []
+    uuids.each do |uuid|
+      entries.push Entry.where(:uuid => uuid.uuid).order("updated_at DESC").first
+    end
+
+    entries.sort! {|a,b|  b.created_at <=> a.created_at }
+
+    return entries
+  end
 end

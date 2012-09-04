@@ -20,14 +20,7 @@ Braindump.controllers  do
 
   get :index do
     if session[:email]
-      @uuids = Entry.select(:uuid).uniq.where(:email => session[:email])
-
-      @entries = []
-      @uuids.each do |uuid|
-        @entries.push Entry.where(:uuid => uuid.uuid).order("updated_at DESC").first
-      end
-
-      @entries.sort! {|a,b|  b.created_at <=> a.created_at }
+      @entries = Entry.get_unique session[:email]
 
       erb :index
     else
