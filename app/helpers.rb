@@ -14,6 +14,7 @@ Braindump.helpers do
     return url
   end
 
+  # Does nice things to text
   def h text
     # Link links
     out = text.gsub( %r{http(s)?://[^\s<]+} ) { |url| "<a href='#{url}'>#{url}</a>" }
@@ -25,6 +26,12 @@ Braindump.helpers do
     out = out.gsub(/#(\w+)/) {|hash| link_to hash, url(:hash, hash[1..-1]) }
 
     return out
+  end
+
+  # Renders Markdown.
+  def m text
+    markdown = RDiscount.new text
+    return markdown.to_html
   end
 
   # Stolen from http://my.rails-royce.org/2010/07/21/email-validation-in-ruby-on-rails-without-regexp/
