@@ -10,7 +10,13 @@ Braindump.controllers  do
   end
 
   post :login do
-    session[:email] = params[:email]
+    a = Mail::Address.new params[:email]
+
+    if a.valid?
+      session[:email] = a.format
+    else
+      session[:email] = nil
+    end
 
     redirect '/'
   end
