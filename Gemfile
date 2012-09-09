@@ -27,7 +27,7 @@ gem 'sinatra-flash', :require => 'sinatra/flash'
 gem 'therubyracer' # Not sure why this isn't a dep for Less...
 
 # Padrino Stable Gem
-gem 'padrino', '0.10.7'
+gem 'padrino', '>= 0.10.7'
 
 # For dev.
 group :development, :test do
