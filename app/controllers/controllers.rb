@@ -79,4 +79,12 @@ Braindump.controllers  do
 
     redirect '/'
   end
+
+  get :hello do
+    "Hello World."
+  end
+
+  get :about do
+    render :about
+  end
 end
