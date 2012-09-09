@@ -8,8 +8,10 @@ task :local do
   Kernel.exec("shotgun -s thin -p 9393")
 end
 
-task :default do
-  puts "THERE IS NO DEFAULT!"
+task :default => [ :test, :spec ]
+
+task :test do
+  puts "Run rake spec instead..."
 end
 
 namespace :ar do
