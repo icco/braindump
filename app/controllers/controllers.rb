@@ -10,10 +10,8 @@ Braindump.controllers  do
   end
 
   post :login do
-    a = Mail::Address.new params[:email]
-
-    if a.valid?
-      session[:email] = a.format
+    if valid_email? params[:email]
+      session[:email] = params[:email]
     else
       session[:email] = nil
     end
