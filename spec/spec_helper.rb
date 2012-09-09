@@ -4,11 +4,9 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
 RSpec.configure do |conf|
   conf.mock_with :rr
   conf.include Rack::Test::Methods
+  # conf.include RSpec::Padrino
 end
 
 def app
-  ##
-  # You can handle all padrino applications using instead:
-  #   Padrino.application
-  Braindump.tap { |app|  }
+  Padrino.application
 end
