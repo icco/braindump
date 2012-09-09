@@ -20,4 +20,9 @@ A site for writing.
 
 To run your site locally, run `rake local`.
 
+## Thoughts
+
+ * Add tests to all helpers
+ * connect up Travis-ci
+ * write a router that automatically creates routes for all helpers using json.
 
