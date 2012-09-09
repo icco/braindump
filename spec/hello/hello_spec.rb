@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../spec_helper.rb"
 
-# Take from http://stackoverflow.com/a/10585921/1063
+# Taken from http://stackoverflow.com/a/10585921/1063
 describe "get '/hello'" do
   it "should display hello world" do
     get '/hello'
