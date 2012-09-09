@@ -29,9 +29,14 @@ gem 'therubyracer' # Not sure why this isn't a dep for Less...
 # Padrino Stable Gem
 gem 'padrino', '>= 0.10.7'
 
-# For dev.
+# For dev & test.
 group :development, :test do
   gem 'heroku'
   gem 'shotgun'
   gem 'sqlite3'
+
+  # Test requirements
+  gem 'rr'
+  gem 'rspec'
+  gem 'rack-test', :require => "rack/test"
 end
