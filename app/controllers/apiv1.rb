@@ -4,6 +4,9 @@ Braindump.controllers :"api/1.0" do
   end
 
   post :new, :provides => :json do
+    if !valid_email? params[:email]
+      return { :status => :fail, :why => "Invalid email address." }.to_json
+    end
 
     # TODO(natwelch): validate the incomming params yo!
     e = Entry.new
@@ -11,6 +14,6 @@ Braindump.controllers :"api/1.0" do
     e.email = params[:email]
     e.save
 
-    { :status => :success, :entry => e.to_json }.to_json
+    return { :status => :success, :entry => e.to_json }.to_json
   end
 end
