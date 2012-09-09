@@ -68,6 +68,7 @@ Braindump.controllers  do
       e.uuid = params[:uuid]
     end
 
+    # TODO(natwelch): validate the incomming params yo!
     e.text = params[:text]
     e.email = session[:email]
     e.save
