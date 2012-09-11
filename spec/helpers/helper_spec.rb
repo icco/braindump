@@ -1,8 +1,13 @@
 require File.dirname(__FILE__) + "/../spec_helper.rb"
+require File.dirname(__FILE__) + "/../../app/helpers.rb"
 
-describe "m" do
+describe "BraindumpHelpers" do
+  subject do
+    Class.new { include BraindumpHelpers }
+  end
+
   it "should render basic Markdown" do
-    output = m "# heading"
-    output.should == "<h1>heading</h1>"
+    output = subject.new.m "# heading"
+    output.should == "<h1>heading</h1>\n"
   end
 end

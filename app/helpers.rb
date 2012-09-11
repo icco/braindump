@@ -1,6 +1,4 @@
-# Helper methods defined here can be accessed in any controller or view in the application
-
-Braindump.helpers do
+module BraindumpHelpers
   def fmt_date datetime
     return datetime.strftime('%c')
   end
@@ -55,3 +53,6 @@ Braindump.helpers do
     return r
   end
 end
+
+# We need to do this since we want to make our helpers testable.
+Braindump.helpers BraindumpHelpers
