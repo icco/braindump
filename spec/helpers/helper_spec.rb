@@ -10,4 +10,9 @@ describe "BraindumpHelpers" do
     output = subject.new.m "# heading"
     output.should == "<h1>heading</h1>\n"
   end
+
+  it "should return a url for an email" do
+    subject.new.gravatar("nat@natwelch.com").should ==
+      "http://www.gravatar.com/avatar/229e3746f6f5100c1d7d5d7a8a5b82d5?default=identicon"
+  end
 end
