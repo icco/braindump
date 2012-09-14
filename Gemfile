@@ -20,17 +20,25 @@ gem 'less'
 gem 'multi_json'
 gem 'rack-less', :git => 'git://github.com/kellyredding/rack-less.git'
 gem 'rake'
+gem 'rdiscount'
 gem 'sequel'
 gem 'sinatra'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 gem 'therubyracer' # Not sure why this isn't a dep for Less...
 
 # Padrino Stable Gem
-gem 'padrino', '0.10.7'
+gem 'padrino', '>= 0.10.7'
 
-# For dev.
-group :development, :test do
+# For dev
+group :development do
   gem 'heroku'
   gem 'shotgun'
-  gem 'sqlite3'
+end
+
+# Test requirements
+group :test do
+  gem 'rack-test', :require => "rack/test"
+  gem 'rr'
+  gem 'rspec'
+  # gem 'rspec-padrino' # Not actually sure what this does...
 end

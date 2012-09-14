@@ -15,25 +15,19 @@
 
   </head>
   <body>
-    <div style="margin-top: 20px"></div>
     <div class="container">
-      <div class="hero-unit">
-        <h1>BrainDump.im</h1>
-
-        <p>
-        BrainDump is a site for writing down your thoughts. A journal if you will.
-        </p>
-
-        <p>
-        <form method="post" class="form-inline" action="/login">
-          <div class="input-prepend">
-            <span class="add-on"><i class="icon-envelope"></i></span>
-            <input type="text" class="input-xlarge" id="input01" name="email" placeholder="Email">
-          </div>
-          <button type="submit" class="btn btn-primary">login</button>
-        </form>
-        </p>
+      <div class="page-header">
+        <small class="pull-right"><a href="/logout">logout</a></small>
+        <h1><a href="/">BrainDump.im</a> <small><%= session[:email] %></small></h1>
       </div>
+
+      <% @entries.each do |entry| %>
+        <div class="well">
+          <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
+          <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>: <%= h entry.text %>
+        </div>
+      <% end %>
+
     </div> <!-- /container -->
 
     <!-- JS. Placed at the end of the document so the pages load faster -->

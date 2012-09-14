@@ -1,33 +1,7 @@
 Braindump.controllers  do
-  # get :index, :map => "/foo/bar" do
-  #   session[:foo] = "bar"
-  #   render 'index'
-  # end
-
-  # get :sample, :map => "/sample/url", :provides => [:any, :js] do
-  #   case content_type
-  #     when :js then ...
-  #     else ...
-  # end
-
-  # get :foo, :with => :id do
-  #   "Maps to url '/foo/#{params[:id]}'"
-  # end
-
-  # get "/example" do
-  #   "Hello world!"
-  # end
-
   get :index do
     if session[:email]
-      @uuids = Entry.select(:uuid).uniq.where(:email => session[:email])
-
-      @entries = []
-      @uuids.each do |uuid|
-        @entries.push Entry.where(:uuid => uuid.uuid).order("updated_at DESC").first
-      end
-
-      @entries.sort! {|a,b|  b.created_at <=> a.created_at }
+      @entries = Entry.get_unique session[:email]
 
       erb :index
     else
@@ -36,7 +10,11 @@ Braindump.controllers  do
   end
 
   post :login do
-    session[:email] = params[:email]
+    if valid_email? params[:email]
+      session[:email] = params[:email]
+    else
+      session[:email] = nil
+    end
 
     redirect '/'
   end
@@ -58,7 +36,9 @@ Braindump.controllers  do
   end
 
   get :hash, :with => :hashtag do
-    params[:hashtag].inspect
+    @entries = Entry.get_unique session[:email], params[:hashtag]
+
+    render :hash
   end
 
   post :edit, :with => :uuid do
@@ -92,10 +72,19 @@ Braindump.controllers  do
       e.uuid = params[:uuid]
     end
 
+    # TODO(natwelch): validate the incomming params yo!
     e.text = params[:text]
     e.email = session[:email]
     e.save
 
     redirect '/'
+  end
+
+  get :hello do
+    "Hello World."
+  end
+
+  get :about do
+    render :about
   end
 end

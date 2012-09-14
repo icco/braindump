@@ -17,6 +17,7 @@
   <body>
     <div class="container">
       <div class="page-header">
+        <small class="pull-right"><a href="/logout">logout</a></small>
         <h1>BrainDump.im <small><%= session[:email] %></small></h1>
       </div>
 
@@ -30,7 +31,10 @@
       <% @entries.each do |entry| %>
         <div class="well">
           <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
-          <a href="/id/<%= entry.uuid %>"><%= fmt_date entry.updated_at %></a>: <%= h entry.text %>
+          <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>:
+          <div class="post-text">
+            <%= m(h(entry.text)) %>
+          </div>
         </div>
       <% end %>
 
