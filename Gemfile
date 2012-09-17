@@ -36,9 +36,9 @@ group :development do
 end
 
 # Test requirements
+gem 'rspec'
 group :test do
   gem 'rack-test', :require => "rack/test"
   gem 'rr'
-  gem 'rspec'
   # gem 'rspec-padrino' # Not actually sure what this does...
 end
