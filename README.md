@@ -26,3 +26,6 @@ To run your site locally, run `rake local`.
 
  * write a router that automatically creates routes for all helpers using json.
 
+ * currently designed around one stream of posts per person. Posts are editable and have version history.
+   * Plan: redsign stream page. Make version history less apparent. Eventually transition to multiple threads
+   * Also add friends and an auth system.
