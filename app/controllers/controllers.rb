@@ -80,6 +80,7 @@ Braindump.controllers  do
     redirect '/'
   end
 
+  # Exists purely to test routing.
   get :hello do
     "Hello World."
   end

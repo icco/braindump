@@ -1,6 +1,6 @@
 module BraindumpHelpers
   def fmt_date datetime
-    return datetime.strftime('%c')
+    return datetime.strftime('%D %R')
   end
 
   def gravatar email
