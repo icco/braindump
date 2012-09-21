@@ -29,3 +29,5 @@ To run your site locally, run `rake local`.
  * currently designed around one stream of posts per person. Posts are editable and have version history.
    * Plan: redsign stream page. Make version history less apparent. Eventually transition to multiple threads
    * Also add friends and an auth system.
+
+ * At a later point, I need to change the versioning schema. The current amount of queries that will run is fucked.
