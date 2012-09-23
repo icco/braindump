@@ -1,11 +1,13 @@
 Braindump.controllers  do
+  layout :main
+
   get :index do
     if session[:email]
       @entries = Entry.get_unique session[:email]
 
       erb :index
     else
-      erb :login
+      erb :login, :layout => false
     end
   end
 

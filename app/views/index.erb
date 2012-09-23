@@ -1,55 +1,24 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>braindump.im</title>
+<div class="row" style="margin-bottom: 11px;">
+  <div class="span8">
+    <div>
+      <form method="post" class="form-vertical">
+        <textarea name="text" class="input-xlarge span8" style="height: 250px;"></textarea>
+        <button type="submit" class="btn btn-primary btn-large pull-right">Post</button>
+      </form>
+    </div>
+  </div> <!-- /span8 -->
+</div> <!-- /row -->
 
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/css/style.css" type="text/css" rel="stylesheet" />
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-  </head>
-  <body>
-    <div class="container">
-      <div class="page-header">
-        <small class="pull-right"><a href="/logout">logout</a></small>
-        <h1>BrainDump.im <small><%= session[:email] %></small></h1>
+<% @entries.each do |entry| %>
+  <div class="row">
+    <div class="span8">
+      <div class="well">
+        <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
+        <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>:
+        <div class="post-text">
+          <%= m(h(entry.text)) %>
+        </div>
       </div>
-
-      <div class="row" style="margin-bottom: 11px;">
-        <div class="span8">
-          <div>
-            <form method="post" class="form-vertical">
-              <textarea name="text" class="input-xlarge span8" style="height: 250px;"></textarea>
-              <button type="submit" class="btn btn-primary btn-large pull-right">Post</button>
-            </form>
-          </div>
-        </div> <!-- /span8 -->
-      </div> <!-- /row -->
-
-      <% @entries.each do |entry| %>
-        <div class="row">
-          <div class="span8">
-            <div class="well">
-              <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
-              <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>:
-              <div class="post-text">
-                <%= m(h(entry.text)) %>
-              </div>
-            </div>
-          </div> <!-- /span8 -->
-        </div> <!-- /row -->
-      <% end %>
-
-    </div> <!-- /container -->
-
-    <!-- JS. Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-    <script src="/js/bootstrap.js"></script>
-  </body>
-</html>
+    </div> <!-- /span8 -->
+  </div> <!-- /row -->
+<% end %>

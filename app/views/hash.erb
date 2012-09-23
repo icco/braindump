@@ -1,37 +1,6 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>braindump.im</title>
-
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/css/style.css" type="text/css" rel="stylesheet" />
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-  </head>
-  <body>
-    <div class="container">
-      <div class="page-header">
-        <small class="pull-right"><a href="/logout">logout</a></small>
-        <h1><a href="/">BrainDump.im</a> <small><%= session[:email] %></small></h1>
-      </div>
-
-      <% @entries.each do |entry| %>
-        <div class="well">
-          <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
-          <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>: <%= h entry.text %>
-        </div>
-      <% end %>
-
-    </div> <!-- /container -->
-
-    <!-- JS. Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-    <script src="/js/bootstrap.js"></script>
-  </body>
-</html>
+<% @entries.each do |entry| %>
+  <div class="well">
+    <img src="<%= gravatar entry.email %>" title="<%= entry.email %>" alt="<%= entry.email %>'s gravatar" class="gravatar" />
+    <a href="/id/<%= entry.uuid %>" title="Last updated <%= fmt_date entry.updated_at %>"><%= fmt_date entry.created_at %></a>: <%= h entry.text %>
+  </div>
+<% end %>

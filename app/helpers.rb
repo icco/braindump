@@ -1,14 +1,21 @@
 module BraindumpHelpers
+
+  def devel?
+    return Padrino.env == :development
+  end
+
   def fmt_date datetime
     return datetime.strftime('%D %R')
   end
 
   def gravatar email
-    options = {
-      #:default => '/images/default_gravatar.png'
-      :default => :identicon
-    }
-    url = Gravatar.new(email).image_url(options)
+    if devel?
+      url = '/img/765-default-avatar.png'
+    else
+      options = { :default => :identicon }
+      url = Gravatar.new(email).image_url(options)
+    end
+
     return url
   end
 
