@@ -31,3 +31,6 @@ To run your site locally, run `rake local`.
    * Also add friends and an auth system.
 
  * At a later point, I need to change the versioning schema. The current amount of queries that will run is fucked.
+   * Maybe just a current bit? Would make showing posts easier
+ 
+ * Add Search...
