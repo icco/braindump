@@ -59,6 +59,17 @@ module BraindumpHelpers
 
     return r
   end
+
+  # This is going to be horrible inefficient, but hey, that's what first tries are for.
+  def hashes email
+    text_with_hashes = ""
+    entries = Entry.select(:text).uniq.where(:email => email).where("text LIKE ?", "%#%")
+    entries.each do |e|
+      text_with_hashes += " " + e.text
+    end
+
+    return text_with_hashes.split(' ').delete_if {|a| !a.match('#\w+') }
+  end
 end
 
 # We need to do this since we want to make our helpers testable.

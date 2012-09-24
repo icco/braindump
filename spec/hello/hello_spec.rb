@@ -6,4 +6,8 @@ describe "get '/hello'" do
     get '/hello'
     last_response.body.should == "Hello World."
   end
+
+  it "should be running in the test env" do
+    Padrino.env.should == :test
+  end
 end

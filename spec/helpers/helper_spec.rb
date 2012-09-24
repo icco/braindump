@@ -15,4 +15,13 @@ describe "BraindumpHelpers" do
     subject.new.gravatar("nat@natwelch.com").should ==
       "http://www.gravatar.com/avatar/229e3746f6f5100c1d7d5d7a8a5b82d5?default=identicon"
   end
+
+  it "should pull the hashes out of text" do
+    e = Entry.new
+    e.text = "test post #withhash"
+    e.email = "test@gmail.com"
+    e.save
+
+    subject.new.hashes("test@gmail.com").should == [ '#withhash' ]
+  end
 end
