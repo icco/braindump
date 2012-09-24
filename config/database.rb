@@ -2,7 +2,7 @@
 # Database config for relational db.
 connections = {
   :development => "postgres://localhost/braindump",
-  :test => "postgres://localhost:5432/braindump_test", # this will probably break w/ travis.ci
+  :test => "postgres://postgres@localhost/braindump_test",
   :production => ENV['DATABASE_URL']
 }
 
