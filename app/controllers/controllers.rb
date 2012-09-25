@@ -27,11 +27,6 @@ Braindump.controllers  do
     redirect '/'
   end
 
-  get '/css/style.css' do
-    content_type 'text/css', :charset => 'utf-8'
-    less :style
-  end
-
   get :id, :with => :uuid do
     @entries = Entry.where(:uuid => params[:uuid]).order("updated_at DESC")
     render :edit
