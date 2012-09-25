@@ -4,8 +4,8 @@ spec_tasks = Dir['spec/*/'].map { |d| File.basename(d) }
 
 spec_tasks.each do |folder|
   RSpec::Core::RakeTask.new("spec:#{folder}") do |t|
-    ENV['PADRINO_ENV'] = 'test'
-    Padrino.reload!
+    # ENV['PADRINO_ENV'] = 'test'
+    # Padrino.reload!
 
     t.pattern = "./spec/#{folder}/**/*_spec.rb"
     t.rspec_opts = %w(-fs --color)
