@@ -68,7 +68,7 @@ module BraindumpHelpers
       text_with_hashes += " " + e.text
     end
 
-    return text_with_hashes.split(' ').delete_if {|a| !a.match('#\w+') }
+    return text_with_hashes.split(' ').delete_if {|a| !a.match('^#\w+$') }.sort.uniq
   end
 end
 
