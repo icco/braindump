@@ -7,6 +7,14 @@
       </form>
     </div>
   </div> <!-- /span8 -->
+  <div class="span4">
+    <strong>Hashes:</strong>
+    <ul>
+      <% hashes(session['email']).each do |hash| %>
+        <li><a href="/hash/<%= hash.slice(1..-1) %>"><%= hash %></a></li>
+      <% end %>
+    </ul>
+  </div> <!-- /span4 -->
 </div> <!-- /row -->
 
 <% @entries.each do |entry| %>
